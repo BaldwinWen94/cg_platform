@@ -1,0 +1,16 @@
+group 'com.calligraphy'
+version '1.0-SNAPSHOT'
+
+subprojects {
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
+        annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    }
+}

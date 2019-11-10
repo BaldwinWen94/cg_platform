@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nirvana.calligraphy.domain.dao.CopyBookDao">
+    <sql id="likeParam1"> LIKE CONCAT('%', #{param1}, '%')</sql>
+
+    <resultMap id="CopyBookMap" type="CopyBook">
+        <id column="id" property="id"/>
+        <result column="copybook_name" property="copyBookName"/>
+        <result column="copybook_type" property="copyBookType"/>
+        <result column="copybook_dynasty" property="copyBookDynasty"/>
+        <result column="copybook_author" property="copyBookAuthor"/>
+        <result column="copybook_content" property="copyBookContent"/>
+        <result column="copybook_source" property="copyBookSource"/>
+        <result column="cover_image_url" property="coverImageUrl"/>
+        <result column="display_image_url" property="displayImageUrl"/>
+        <result column="low_resolution_download_times" property="lowResolutionDownloadTimes"/>
+        <result column="high_resolution_download_times" property="highResolutionDownloadTimes"/>
+        <result column="read_times" property="readTimes"/>
+        <result column="commend_times" property="commendTimes"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectCopyBookByDefault" resultMap="CopyBookMap">
+        SELECT *
+          FROM copybook a
+         limit #{param1}, #{param2}
+    </select>
+
+    <select id="selectCopyBookByNameFuzzy" resultMap="CopyBookMap">
+        SELECT *
+        FROM copybook a LEFT JOIN copybook_tag b ON a.id = b.copybook_id
+        WHERE a.copybook_name
+        <include refid="likeParam1"/>
+        OR b.copybook_tag_name
+        <include refid="likeParam1"/>
+        OR a.copybook_author
+        <include refid="likeParam1"/>
+        OR a.copybook_dynasty
+        <include refid="likeParam1"/>
+        limit #{param2}, #{param3}
+    </select>
+
+    <select id="countCopyBookByDefault" resultType="java.lang.Integer">
+        SELECT count(*)
+          FROM copybook a
+    </select>
+
+    <select id="countCopyBookByNameFuzzy" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(a.id)
+        FROM copybook a LEFT JOIN copybook_tag b ON a.id = b.copybook_id
+        WHERE a.copybook_name
+        <include refid="likeParam1"/>
+        OR b.copybook_tag_name
+        <include refid="likeParam1"/>
+        OR a.copybook_author
+        <include refid="likeParam1"/>
+        OR a.copybook_dynasty
+        <include refid="likeParam1"/>
+    </select>
+
+    <select id="selectCopyBookById" parameterType="java.lang.Integer" resultMap="CopyBookMap">
+        SELECT *
+          FROM copybook
+         WHERE id = #{copyBookId}
+    </select>
+
+    <insert id="createCopyBook" parameterType="CopyBook"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO copybook(copybook_name, copybook_type, copybook_dynasty, copybook_author, copybook_content,
+                             copybook_source, cover_image_url, display_image_url, low_resolution_download_times,
+                             high_resolution_download_times, read_times, commend_times)
+        VALUES(#{copyBookName}, #{copyBookType}, #{copyBookDynasty}, #{copyBookAuthor}, #{copyBookContent},
+               #{copyBookSource}, #{coverImageUrl}, #{displayImageUrl}, #{lowResolutionDownloadTimes},
+               #{highResolutionDownloadTimes}, #{readTimes}, #{commendTimes})
+    </insert>
+
+    <update id="updateCopyBook" parameterType="CopyBook">
+        UPDATE copybook
+           SET copybook_name = #{copyBookName},
+               copybook_type = #{copyBookType},
+               copybook_dynasty = #{copyBookDynasty},
+               copybook_author = #{copyBookAuthor},
+               copybook_content = #{copyBookContent},
+               copybook_source = #{copyBookSource},
+               cover_image_url = #{coverImageUrl},
+               display_image_url = #{displayImageUrl},
+               low_resolution_download_times = #{lowResolutionDownloadTimes},
+               high_resolution_download_times = #{highResolutionDownloadTimes},
+               read_times = #{readTimes},
+               commend_times = #{commendTimes}
+         WHERE id = #{id}
+    </update>
+
+    <delete id="deleteCopyBook" parameterType="java.lang.Integer">
+        DELETE
+          FROM copybook
+         WHERE id = #{copyBookId}
+    </delete>
+
+    <update id="incrementColumnOfCopyBook" parameterType="java.lang.Integer">
+        UPDATE copybook
+           SET ${param1} = ${param1} + 1
+         WHERE id = #{param2}
+    </update>
+
+    <resultMap id="CopyBookTagMap" type="CopyBookTag">
+        <id column="id" property="id"/>
+        <result column="copybook_id" property="copyBookId"/>
+        <result column="copybook_tag_name" property="copyBookTagName"/>
+        <result column="search_times" property="searchTimes"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectTagOfCopyBook" resultMap="CopyBookTagMap">
+        SELECT *
+          FROM copybook_tag
+         WHERE copybook_id = #{copyBookId}
+    </select>
+
+    <insert id="createCopyBookTag" parameterType="CopyBookTag"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO copybook_tag(copybook_tag_name, copybook_id)
+        VALUES(#{copyBookTagName}, #{copyBookId})
+    </insert>
+
+    <update id="incrementCopyBookTagSearchTimes" parameterType="java.lang.String">
+        UPDATE copybook_tag
+           SET search_times = search_times + 1
+         WHERE copybook_tag_name = #{tagName}
+    </update>
+
+    <delete id="deleteTagOfCopyBook" parameterType="java.lang.Integer">
+        DELETE FROM copybook_tag
+        WHERE copybook_id = #{copybookId}
+    </delete>
+
+    <resultMap id="CopyBookDetailMap" type="CopyBookDetail">
+        <id column="id" property="id"/>
+        <result column="copybook_id" property="copyBookId"/>
+        <result column="sequence_no" property="sequenceNo"/>
+        <result column="high_resolution_image" property="highResolutionImage"/>
+        <result column="low_resolution_image" property="lowResolutionImage"/>
+        <result column="thumbnail" property="thumbnail"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectCopyBookDetailBySequenceNo" resultMap="CopyBookDetailMap">
+        SELECT *
+          FROM copybook_detail
+         WHERE copybook_id = #{param1} AND sequence_no = #{param2}
+    </select>
+
+    <select id="selectDetailOfCopyBook" parameterType="java.lang.Integer" resultMap="CopyBookDetailMap">
+        SELECT *
+          FROM copybook_detail
+         WHERE copybook_id = #{copybookId}
+    </select>
+
+    <select id="countCopyBookDetail" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT count(a.id)
+          FROM copybook_detail a
+         WHERE a.copybook_id = #{copyBookId}
+    </select>
+
+    <insert id="createCopyBookDetail" parameterType="CopyBookDetail"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO copybook_detail(copybook_id, sequence_no, high_resolution_image, low_resolution_image, thumbnail)
+        VALUES(#{copyBookId}, #{sequenceNo}, #{highResolutionImage}, #{lowResolutionImage}, #{thumbnail})
+    </insert>
+
+    <delete id="deleteDetailOfCopyBook" parameterType="java.lang.Integer">
+        DELETE FROM copybook_detail
+        WHERE copybook_id = #{copybookId}
+    </delete>
+</mapper>

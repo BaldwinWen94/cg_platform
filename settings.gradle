@@ -1,0 +1,6 @@
+rootProject.name = 'cg_platform'
+include 'domain'
+include 'common'
+include 'cg_user'
+include 'service'
+
