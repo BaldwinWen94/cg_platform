@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nirvana.calligraphy.domain.dao.InstitutionDao">
+    <resultMap id="InstitutionMap" type="Institution">
+        <id column="id" property="id"/>
+        <result column="institution_name" property="institutionName"/>
+        <result column="institution_location" property="institutionLocation"/>
+        <result column="institution_icon" property="institutionIcon"/>
+        <result column="institution_description" property="institutionDescription"/>
+        <result column="institution_image" property="institutionImage"/>
+        <result column="follow_count" property="followCount"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectInstitutionByPage" resultMap="InstitutionMap">
+        SELECT *
+          FROM institution
+      ORDER BY id DESC
+         limit #{param1}, #{param2}
+    </select>
+
+    <select id="selectInstitutionById" parameterType="java.lang.Integer" resultMap="InstitutionMap">
+        SELECT *
+          FROM institution
+         WHERE id = #{institutionId}
+    </select>
+
+    <resultMap id="InstitutionAchievementMap" type="InstitutionAchievement">
+        <id column="id" property="id"/>
+        <result column="institution_id" property="institutionId"/>
+        <result column="achievement_year" property="achievementYear"/>
+        <result column="achievement_image" property="achievementImage"/>
+        <result column="achievement_content" property="achievementContent"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectInstitutionAchievementByPage" resultMap="InstitutionAchievementMap">
+        SELECT *
+          FROM institution_achievement
+         WHERE institution_id = #{param1}
+      ORDER BY achievement_year DESC, id DESC
+         limit #{param2}, #{param3}
+    </select>
+
+    <resultMap id="InstitutionEnvironmentMap" type="InstitutionEnvironment">
+        <id column="id" property="id"/>
+        <result column="institution_id" property="institutionId"/>
+        <result column="environment_image" property="environmentImage"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectInstitutionEnvironmentByPage" resultMap="InstitutionEnvironmentMap">
+        SELECT *
+          FROM institution_environment
+         WHERE institution_id = #{param1}
+         limit #{param2}, #{param3}
+    </select>
+
+    <resultMap id="InstitutionTeacherMap" type="InstitutionTeacher">
+        <id column="id" property="id"/>
+        <result column="institution_id" property="institutionId"/>
+        <result column="teacher_name" property="teacherName"/>
+        <result column="teacher_image" property="teacherImage"/>
+        <result column="teacher_description" property="teacherDescription"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectInstitutionTeacherByPage" resultMap="InstitutionTeacherMap">
+        SELECT *
+          FROM institution_teacher
+         WHERE institution_id = #{param1}
+         limit #{param2}, #{param3}
+    </select>
+
+    <resultMap id="InstitutionPrincipalQuoteMap" type="InstitutionPrincipalQuote">
+        <id column="id" property="id"/>
+        <result column="institution_id" property="institutionId"/>
+        <result column="principal_name" property="principalName"/>
+        <result column="principal_quote" property="principalQuote"/>
+        <result column="quote_image" property="quoteImage"/>
+        <result column="quote_description" property="quoteDescription"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectPrincipalQuoteOfInstitution" parameterType="java.lang.Integer" resultMap="InstitutionPrincipalQuoteMap">
+        SELECT *
+          FROM institution_principal_quote
+         WHERE institution_id = #{institutionId}
+    </select>
+
+    <resultMap id="InstitutionCourseMap" type="InstitutionCourse">
+        <id column="id" property="id"/>
+        <result column="institution_id" property="institutionId"/>
+        <result column="course_name" property="courseName"/>
+        <result column="course_type" property="courseType"/>
+        <result column="course_purpose" property="coursePurpose"/>
+        <result column="course_content" property="courseContent"/>
+        <result column="course_description" property="courseDescription"/>
+        <result column="course_fee" property="courseFee"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectInstitutionCourseByPage" resultMap="InstitutionCourseMap">
+        SELECT *
+          FROM institution_course
+         WHERE institution_id = #{param1}
+      ORDER BY id DESC
+         limit #{param2}, #{param3}
+    </select>
+
+    <select id="selectInstitutionCourseById" parameterType="java.lang.Integer" resultMap="InstitutionCourseMap">
+        SELECT *
+          FROM institution_course
+         WHERE id = #{institutionCourseId}
+    </select>
+
+    <resultMap id="InstitutionActivityMap" type="InstitutionActivity">
+        <id column="id" property="id"/>
+        <result column="institution_id" property="institutionId"/>
+        <result column="activity_name" property="activityName"/>
+        <result column="activity_address" property="activityAddress"/>
+        <result column="activity_image" property="activityImage"/>
+        <result column="activity_description" property="activityDescription"/>
+        <result column="activity_start_time" property="activityStartTime"/>
+        <result column="activity_end_time" property="activityEndTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectInstitutionActivityByPage" resultMap="InstitutionActivityMap">
+        SELECT *
+          FROM institution_activity
+         WHERE institution_id = #{param1}
+      ORDER BY ID DESC
+         limit #{param2}, #{param3}
+    </select>
+
+    <select id="selectInstitutionActivityById" parameterType="java.lang.Integer" resultMap="InstitutionActivityMap">
+        SELECT *
+          FROM institution_activity
+         WHERE id = #{institutionActivityId}
+    </select>
+</mapper>

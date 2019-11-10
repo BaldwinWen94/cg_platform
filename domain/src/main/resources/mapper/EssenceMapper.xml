@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.calligraphy.domain.dao.EssenceDao">
+    <resultMap id="EssenceTypeMap" type="EssenceType">
+        <id column="id" property="id"/>
+        <result column="essence_type1" property="essenceType1"/>
+        <result column="essence_type2" property="essenceType2"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectAllEssenceType" resultMap="EssenceTypeMap">
+        SELECT *
+          FROM essence_type
+    </select>
+
+    <select id="selectEssenceTypeByCondition" resultMap="EssenceTypeMap">
+        SELECT *
+          FROM essence_type
+         WHERE essence_type1 = #{param1}
+           AND essence_type2 = #{param2}
+    </select>
+
+    <insert id="createEssenceType" parameterType="EssenceType"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO essence_type(essence_type1, essence_type2)
+        VALUES(#{essenceType1}, #{essenceType2})
+    </insert>
+
+    <resultMap id="EssenceResultMap" type="com.calligraphy.domain.result.EssenceResult">
+        <id column="id" property="essenceId"/>
+        <result column="essence_text" property="essenceText"/>
+        <result column="essence_type1" property="essenceType1"/>
+        <result column="essence_type2" property="essenceType2"/>
+        <result column="essence_dynasty" property="essenceDynasty"/>
+        <result column="essence_source" property="essenceSource"/>
+        <result column="essence_desc" property="essenceDesc"/>
+        <result column="word_count" property="wordCount"/>
+    </resultMap>
+
+    <select id="selectEssenceByCondition" resultMap="EssenceResultMap">
+        SELECT a.id,
+        a.essence_text,
+        b.essence_type1,
+        b.essence_type2,
+        a.essence_dynasty,
+        a.essence_source,
+        a.essence_desc,
+        a.word_count,
+        a.create_time,
+        a.modify_time
+        FROM essence a INNER JOIN essence_type b ON a.essence_type_id = b.id
+        WHERE b.essence_type1 = #{param1}
+        <choose>
+            <when test="param2 != '全部'">
+                AND b.essence_type2 = #{param2}
+            </when>
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        <choose>
+            <when test="param3 != '全部'">
+                AND a.word_count = #{param3}
+            </when>
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        AND a.essence_dynasty = #{param4}
+        limit #{param5}, #{param6}
+    </select>
+
+    <resultMap id="EssenceMap" type="Essence">
+        <id column="id" property="id"/>
+        <result column="essence_text" property="essenceText"/>
+        <result column="essence_type_id" property="essenceTypeId"/>
+        <result column="essence_dynasty" property="essenceDynasty"/>
+        <result column="essence_source" property="essenceSource"/>
+        <result column="essence_desc" property="essenceDesc"/>
+        <result column="word_count" property="wordCount"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectEssenceById" parameterType="java.lang.Integer" resultMap="EssenceMap">
+        SELECT *
+          FROM essence
+         WHERE id = #{essenceId}
+    </select>
+
+    <select id="countEssenceByCondition" resultType="java.lang.Integer">
+        SELECT count(a.id)
+        FROM essence a INNER JOIN essence_type b ON a.essence_type_id = b.id
+        WHERE b.essence_type1 = #{param1}
+        <choose>
+            <when test="param2 != '全部'">
+                AND b.essence_type2 = #{param2}
+            </when>
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        <choose>
+            <when test="param3 != '全部'">
+                AND a.word_count = #{param3}
+            </when>
+            <otherwise>
+
+            </otherwise>
+        </choose>
+        AND a.essence_dynasty = #{param4}
+    </select>
+
+    <insert id="createEssence" parameterType="Essence"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO essence(essence_text, essence_type_id, essence_dynasty, essence_source, essence_desc, word_count)
+        VALUES(#{essenceText}, #{essenceTypeId}, #{essenceDynasty}, #{essenceSource}, #{essenceDesc}, #{wordCount})
+    </insert>
+
+    <update id="updateEssence" parameterType="Essence">
+        UPDATE essence
+           SET essence_text = #{essenceText},
+               essence_type_id = #{essenceTypeId},
+               essence_dynasty = #{essenceDynasty},
+               essence_source = #{essenceSource},
+               essence_desc = #{essenceDesc},
+               word_count = #{wordCount}
+         WHERE id = #{id}
+    </update>
+
+    <delete id="deleteEssence" parameterType="java.lang.Integer">
+        DELETE
+          FROM essence
+         WHERE id = #{essenceId}
+    </delete>
+</mapper>

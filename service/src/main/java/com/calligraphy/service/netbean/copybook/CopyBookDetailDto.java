@@ -1,4 +1,4 @@
-package com.calligraphy.service.netbean;
+package com.calligraphy.service.netbean.copybook;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

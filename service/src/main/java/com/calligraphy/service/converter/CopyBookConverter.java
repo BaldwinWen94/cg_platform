@@ -3,9 +3,9 @@ package com.calligraphy.service.converter;
 import com.calligraphy.domain.entity.CopyBook;
 import com.calligraphy.domain.entity.CopyBookDetail;
 import com.calligraphy.domain.entity.CopyBookTag;
-import com.calligraphy.service.netbean.CopyBookDetailDto;
-import com.calligraphy.service.netbean.CopyBookDto;
-import com.calligraphy.service.netbean.CopyBookOverviewDto;
+import com.calligraphy.service.netbean.copybook.CopyBookDetailDto;
+import com.calligraphy.service.netbean.copybook.CopyBookDto;
+import com.calligraphy.service.netbean.copybook.CopyBookOverviewDto;
 import org.springframework.util.StringUtils;
 
 import java.util.List;

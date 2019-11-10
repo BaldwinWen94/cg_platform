@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.calligraphy.domain.dao.PopularSearchDao">
+    <resultMap id="PopularSearchMap" type="PopularSearch">
+        <id column="id" property="id"/>
+        <result column="popular_search_name" property="popularSearchName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectPopularSearchByPage" resultMap="PopularSearchMap">
+        SELECT *
+          FROM popular_search
+         limit #{param1}, #{param2}
+    </select>
+
+    <select id="selectPopularSearchById" parameterType="java.lang.Integer" resultMap="PopularSearchMap">
+        SELECT *
+          FROM popular_search
+         WHERE id = #{popularSearchId}
+    </select>
+
+    <select id="selectPopularSearchByName" parameterType="java.lang.String" resultMap="PopularSearchMap">
+        SELECT *
+          FROM popular_search
+         WHERE popular_search_name = #{name}
+    </select>
+
+    <insert id="createPopularSearch" parameterType="PopularSearch"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO popular_search(popular_search_name)
+        VALUES(#{popularSearchName})
+    </insert>
+
+    <update id="updatePopularSearch" parameterType="PopularSearch">
+        UPDATE popular_search
+           SET popular_search_name = #{popularSearchName}
+         WHERE id = #{id}
+    </update>
+
+    <update id="deletePopularSearch" parameterType="java.lang.Integer">
+        DELETE
+          FROM popular_search
+         WHERE id = #{popularSearchId}
+    </update>
+</mapper>
