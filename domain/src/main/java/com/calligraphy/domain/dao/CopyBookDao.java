@@ -15,6 +15,8 @@ public interface CopyBookDao {
                                              Integer offset,
                                              Integer size);
 
+    List<CopyBook> selectCopyBookByAuthorName(String authorName);
+
     Integer countCopyBookByDefault();
 
     Integer countCopyBookByNameFuzzy(String condition);
@@ -37,9 +39,6 @@ public interface CopyBookDao {
     void incrementCopyBookTagSearchTimes(String tagName);
 
     void deleteTagOfCopyBook(Integer copyBookId);
-
-    CopyBookDetail selectCopyBookDetailBySequenceNo(Integer copybookId,
-                                                    Integer sequenceNo);
 
     List<CopyBookDetail> selectDetailOfCopyBook(Integer copybookId);
 

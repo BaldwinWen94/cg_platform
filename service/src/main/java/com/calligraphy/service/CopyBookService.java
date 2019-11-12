@@ -6,9 +6,9 @@ import org.springframework.http.ResponseEntity;
 public interface CopyBookService {
     ResponseEntity selectCopyBookFuzzy(String condition, PagingParam pagingParam);
 
-    ResponseEntity selectCopyBookByIdForUser(Integer copyBookId);
+    ResponseEntity selectCopyBookByAuthorName(String authorName);
 
-    ResponseEntity selectCopyBookDetail(Integer copyBookId, Integer sequenceNo);
+    ResponseEntity selectCopyBookById(Integer copyBookId);
 
     ResponseEntity incrementCountForCopyBookColumn(Integer copyBookId, String column);
 }

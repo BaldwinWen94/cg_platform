@@ -23,7 +23,7 @@ public class CopyBookConverter {
         return overviewDto;
     }
 
-    public static CopyBookDto toDto(CopyBook copyBook, List<CopyBookTag> copyBookTagList, Integer detailCount,
+    public static CopyBookDto toDto(CopyBook copyBook, List<CopyBookTag> copyBookTagList,
                                     List<CopyBookDetail> copyBookDetails) {
         CopyBookDto dto = new CopyBookDto();
         dto.setCopyBookId(copyBook.getId());

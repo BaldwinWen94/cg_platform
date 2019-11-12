@@ -1,7 +1,9 @@
 package com.calligraphy.common.netbean;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 
+@Data
 public class ResponseMsg<T> {
     private Integer code;
 

@@ -43,29 +43,25 @@ public class CopyBookServiceImpl implements CopyBookService {
 
         copyBookDao.incrementCopyBookTagSearchTimes(condition);
         return HttpUtil.successWithData(pagingData);
-
     }
 
-    public ResponseEntity selectCopyBookByIdForUser(Integer copyBookId) {
+    @Override
+    public ResponseEntity selectCopyBookByAuthorName(String authorName) {
+        List<CopyBook> copyBookList = copyBookDao.selectCopyBookByAuthorName(authorName);
+        List<CopyBookOverviewDto> overviewDtoList = copyBookList.stream().map(CopyBookConverter::toOverviewDto)
+                .collect(Collectors.toList());
+        return HttpUtil.successWithData(overviewDtoList);
+    }
+
+    public ResponseEntity selectCopyBookById(Integer copyBookId) {
         CopyBook copyBook = copyBookDao.selectCopyBookById(copyBookId);
         if (copyBook == null) {
             return HttpUtil.resourceNotFound();
         }
 
         List<CopyBookTag> tagList = copyBookDao.selectTagOfCopyBook(copyBookId);
-        Integer detailCount = copyBookDao.countCopyBookDetail(copyBookId);
-        CopyBookDto detailDto = CopyBookConverter.toDto(copyBook, tagList, detailCount, null);
-
-        return HttpUtil.successWithData(detailDto);
-    }
-
-    public ResponseEntity selectCopyBookDetail(Integer copyBookId, Integer sequenceNo) {
-        CopyBookDetail detail = copyBookDao.selectCopyBookDetailBySequenceNo(copyBookId, sequenceNo);
-        if (detail == null) {
-            return HttpUtil.resourceNotFound();
-        }
-
-        CopyBookDetailDto detailDto = CopyBookConverter.toDetailDto(detail);
+        List<CopyBookDetail> detailList = copyBookDao.selectDetailOfCopyBook(copyBookId);
+        CopyBookDto detailDto = CopyBookConverter.toDto(copyBook, tagList, detailList);
 
         return HttpUtil.successWithData(detailDto);
     }

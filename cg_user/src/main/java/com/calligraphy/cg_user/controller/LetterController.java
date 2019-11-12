@@ -1,9 +1,8 @@
 package com.calligraphy.cg_user.controller;
 
 
-import com.calligraphy.common.netbean.PagingParam;
-import com.calligraphy.service.PopularSearchService;
-import com.calligraphy.service.netbean.popular_search.PopularSearchDto;
+import com.calligraphy.service.LetterService;
+import com.calligraphy.service.netbean.letter.LetterQueryDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,27 +17,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/popular_search")
+@RequestMapping("/letter")
 @Transactional
-@Api(value = "模块：热门搜索")
-public class PopularSearchController {
+@Api(value = "模块：书法字典")
+public class LetterController {
 
-    private final PopularSearchService popularSearchService;
+    private final LetterService letterService;
 
     @Autowired
-    public PopularSearchController(PopularSearchService popularSearchService) {
-        this.popularSearchService = popularSearchService;
+    public LetterController(LetterService letterService) {
+        this.letterService = letterService;
     }
 
-    @ApiOperation(value = "查询热门搜索列表")
+    @ApiOperation(value = "根据字体查询书法字典")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "查询成功", response = PopularSearchDto.class, responseContainer = "list"),
+            @ApiResponse(code = 200, message = "查询成功", response = LetterQueryDto.class, responseContainer = "list"),
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity selectPopularSearchByPage(@RequestParam(required = false) Integer pageStart,
-                                                    @RequestParam(required = false) Integer pageSize) {
-        return popularSearchService.selectPopularSearch(new PagingParam(pageStart, pageSize));
+    public ResponseEntity selectLetterSampleByFontType(@RequestParam String letter,
+                                                       @RequestParam Integer fontType) {
+        return letterService.selectLetterSampleByFontType(letter, fontType);
     }
 }

@@ -1,8 +1,8 @@
 package com.calligraphy.cg_user.controller;
 
+import com.calligraphy.common.netbean.PagingParam;
 import com.calligraphy.service.InstitutionService;
 import com.calligraphy.service.netbean.institution.*;
-import com.calligraphy.common.netbean.PagingParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/institution")
 @Transactional
-@Api(value = "Module_Institution", description = "模块：机构")
+@Api(value = "模块：机构")
 public class InstitutionController {
 
     private final InstitutionService institutionService;
@@ -32,7 +32,7 @@ public class InstitutionController {
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
-    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectInstitutionByPage(@RequestParam(required = false) Integer pageStart,
                                                   @RequestParam(required = false) Integer pageSize) {
         return institutionService.selectInstitutionOverview(new PagingParam(pageStart, pageSize));
@@ -44,7 +44,7 @@ public class InstitutionController {
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
-    @GetMapping(value = "/{institutionId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/{institutionId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectInstitutionById(@PathVariable Integer institutionId) {
         return institutionService.selectInstitutionById(institutionId);
     }
@@ -55,7 +55,7 @@ public class InstitutionController {
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
-    @GetMapping(value = "/{institutionId}/achievement", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/{institutionId}/achievement", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectInstitutionAchievementByPage(@PathVariable Integer institutionId,
                                                              @RequestParam(required = false) Integer pageStart,
                                                              @RequestParam(required = false) Integer pageSize) {
@@ -69,7 +69,7 @@ public class InstitutionController {
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
-    @GetMapping(value = "/{institutionId}/environment", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/{institutionId}/environment", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectInstitutionEnvironmentByPage(@PathVariable Integer institutionId,
                                                              @RequestParam(required = false) Integer pageStart,
                                                              @RequestParam(required = false) Integer pageSize) {
@@ -83,7 +83,7 @@ public class InstitutionController {
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
-    @GetMapping(value = "/{institutionId}/teacher", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/{institutionId}/teacher", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectInstitutionTeacherByPage(@PathVariable Integer institutionId,
                                                          @RequestParam(required = false) Integer pageStart,
                                                          @RequestParam(required = false) Integer pageSize) {
@@ -97,7 +97,7 @@ public class InstitutionController {
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
-    @GetMapping(value = "/{institutionId}/principal_quote", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/{institutionId}/principal_quote", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectInstitutionPrincipalQuote(@PathVariable Integer institutionId) {
         return institutionService.selectInstitutionPrincipalQuote(institutionId);
     }
@@ -108,7 +108,7 @@ public class InstitutionController {
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
-    @GetMapping(value = "/{institutionId}/course", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/{institutionId}/course", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectInstitutionCourseByPage(@PathVariable Integer institutionId,
                                                         @RequestParam(required = false) Integer pageStart,
                                                         @RequestParam(required = false) Integer pageSize) {
@@ -122,7 +122,7 @@ public class InstitutionController {
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
-    @GetMapping(value = "/course/{courseId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/course/{courseId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectInstitutionCourseById(@PathVariable Integer courseId) {
         return institutionService.selectInstitutionCourseById(courseId);
     }
@@ -133,7 +133,7 @@ public class InstitutionController {
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
-    @GetMapping(value = "/{institutionId}/activity", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/{institutionId}/activity", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectInstitutionActivityByPage(@PathVariable Integer institutionId,
                                                           @RequestParam(required = false) Integer pageStart,
                                                           @RequestParam(required = false) Integer pageSize) {
@@ -147,7 +147,7 @@ public class InstitutionController {
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
-    @GetMapping(value = "/activity/{activityId}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/activity/{activityId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectInstitutionActivityById(@PathVariable Integer activityId) {
         return institutionService.selectInstitutionActivityById(activityId);
     }

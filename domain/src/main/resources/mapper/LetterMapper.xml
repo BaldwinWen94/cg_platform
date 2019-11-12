@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.calligraphy.domain.dao.LetterDao">
+    <resultMap id="LetterMap" type="Letter">
+        <id column="id" property="id"/>
+        <result column="letter_name" property="letterName"/>
+        <result column="font_type" property="fontType"/>
+        <result column="letter_sample_image" property="letterSampleImage"/>
+        <result column="letter_sample_author" property="letterSampleAuthor"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <select id="selectLetterSampleByFontType" resultMap="LetterMap">
+        SELECT *
+          FROM letter
+         WHERE letter_name = #{param1}
+           AND font_type = #{param2}
+      ORDER BY id DESC
+    </select>
+</mapper>

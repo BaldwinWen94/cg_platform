@@ -36,6 +36,11 @@ public class HttpUtil {
                 .body(new ResponseMsg<>(-103, e.getBindingResult().getAllErrors().get(0).getDefaultMessage()));
     }
 
+    public static ResponseEntity parameterError(String selfDefinedMsg) {
+        return ResponseEntity.badRequest()
+                .body(new ResponseMsg<>(-103, selfDefinedMsg));
+    }
+
     public static ResponseEntity resourceNotFound() {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ResponseMsg<>(-104, "找不到该资源"));

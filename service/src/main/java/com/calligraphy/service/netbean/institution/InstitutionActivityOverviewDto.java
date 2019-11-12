@@ -16,7 +16,7 @@ public class InstitutionActivityOverviewDto {
     @ApiModelProperty(value = "活动状态，未开始/进行中/已结束")
     private ActivityStatus activityStatus;
 
-    public enum ActivityStatus{
+    public enum ActivityStatus {
         NOT_STARTED, ONGOING, ENDED
     }
 }

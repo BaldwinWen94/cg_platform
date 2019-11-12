@@ -75,5 +75,6 @@ public class CopyBookDto {
     private List<String> copyBookTagList;
 
     @ApiModelProperty(value = "字帖明细图片列表，用于后台查询，用户端不返回此字段")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<CopyBookDetailDto> copyBookDetailList;
 }

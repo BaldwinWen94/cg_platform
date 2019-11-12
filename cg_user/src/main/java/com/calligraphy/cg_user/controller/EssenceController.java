@@ -1,7 +1,6 @@
 package com.calligraphy.cg_user.controller;
 
 
-
 import com.calligraphy.common.netbean.PagingParam;
 import com.calligraphy.service.EssenceService;
 import com.calligraphy.service.netbean.essence.EssenceDto;
@@ -22,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/essence")
 @Transactional
-@Api(value = "Module_Essence", description = "模块：书家必携")
+@Api(value = "模块：书家必携")
 public class EssenceController {
 
     private EssenceService essenceService;
@@ -38,7 +37,7 @@ public class EssenceController {
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
-    @GetMapping(value = "/type", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/type", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectAllEssenceType() {
         return essenceService.selectAllEssenceType();
     }
@@ -49,7 +48,7 @@ public class EssenceController {
             @ApiResponse(code = 400, message = "参数错误"),
             @ApiResponse(code = 403, message = "身份错误")
     })
-    @GetMapping(value = "/condition", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/condition", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectEssenceByCondition(@RequestParam String essenceType1,
                                                    @RequestParam String essenceType2,
                                                    @RequestParam String wordCount,

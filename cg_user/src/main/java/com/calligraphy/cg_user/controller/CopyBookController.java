@@ -42,6 +42,17 @@ public class CopyBookController {
         return copyBookService.selectCopyBookFuzzy(condition, new PagingParam(pageStart, pageSize));
     }
 
+    @ApiOperation(value = "根据作者名称查询字帖列表")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "查询成功", response = CopyBookOverviewDto.class, responseContainer = "list"),
+            @ApiResponse(code = 400, message = "参数错误"),
+            @ApiResponse(code = 403, message = "身份错误")
+    })
+    @GetMapping(value = "/copybook/by_author", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity selectCopyBookByAuthorName(@RequestParam String authorName) {
+        return copyBookService.selectCopyBookByAuthorName(authorName);
+    }
+
     @ApiOperation(value = "查询字帖详情")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "查询成功", response = CopyBookDto.class),
@@ -50,20 +61,8 @@ public class CopyBookController {
     })
     @GetMapping(value = "/copybook/{copyBookId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectCopyBookByIdForUser(@PathVariable Integer copyBookId) {
-        return copyBookService.selectCopyBookByIdForUser(copyBookId);
+        return copyBookService.selectCopyBookById(copyBookId);
     }
-
-    @ApiOperation(value = "查询字帖图片明细")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "查询成功", response = CopyBookDetailDto.class, responseContainer = "list"),
-            @ApiResponse(code = 400, message = "参数错误"),
-            @ApiResponse(code = 403, message = "身份错误")
-    })
-    @GetMapping(value = "/copybook/{copyBookId}/image/{sequenceNo}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity selectCopyBookById(@PathVariable Integer copyBookId, @PathVariable Integer sequenceNo) {
-        return copyBookService.selectCopyBookDetail(copyBookId, sequenceNo);
-    }
-
 
     @ApiOperation(value = "推荐字帖")
     @ApiResponses(value = {

@@ -87,7 +87,8 @@
         <result column="modify_time" property="modifyTime"/>
     </resultMap>
 
-    <select id="selectPrincipalQuoteOfInstitution" parameterType="java.lang.Integer" resultMap="InstitutionPrincipalQuoteMap">
+    <select id="selectPrincipalQuoteOfInstitution" parameterType="java.lang.Integer"
+            resultMap="InstitutionPrincipalQuoteMap">
         SELECT *
           FROM institution_principal_quote
          WHERE institution_id = #{institutionId}
