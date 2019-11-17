@@ -28,7 +28,7 @@ public class CopyBookDto {
     @ApiModelProperty(value = "字帖朝代", required = true)
     @NotNull(message = "字帖朝代不能为空")
     @Size(max = 45, message = "字帖作者超长")
-    private String copyBookDynasty;
+    private Integer copyBookDynasty;
 
     @ApiModelProperty(value = "字帖作者", required = true)
     @NotNull(message = "字帖作者不能为空")

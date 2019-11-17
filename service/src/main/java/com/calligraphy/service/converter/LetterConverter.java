@@ -8,6 +8,7 @@ public class LetterConverter {
         LetterSampleDto sampleDto = new LetterSampleDto();
         sampleDto.setLetterSampleAuthor(letter.getLetterSampleAuthor());
         sampleDto.setLetterSampleImage(letter.getLetterSampleImage());
+        sampleDto.setLetterSampleDynasty(letter.getLetterSampleDynasty());
         return sampleDto;
     }
 }

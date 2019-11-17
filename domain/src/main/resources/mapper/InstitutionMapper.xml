@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.nirvana.calligraphy.domain.dao.InstitutionDao">
+<mapper namespace="com.calligraphy.domain.dao.InstitutionDao">
     <resultMap id="InstitutionMap" type="Institution">
         <id column="id" property="id"/>
         <result column="institution_name" property="institutionName"/>

@@ -12,5 +12,7 @@ public class Letter extends CalligraphyBaseEntity {
 
     private String letterSampleImage;
 
+    private Integer letterSampleDynasty;
+
     private String letterSampleAuthor;
 }

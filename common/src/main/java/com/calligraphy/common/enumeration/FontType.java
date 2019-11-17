@@ -17,14 +17,13 @@ public enum FontType {
     }
 
     public static boolean checkFontType(Integer fontType) {
-        boolean result = false;
         if (fontType != null) {
             for (FontType type : FontType.values()) {
                 if (type.getTypeNo().equals(fontType)) {
-                    result = true;
+                    return true;
                 }
             }
         }
-        return result;
+        return false;
     }
 }

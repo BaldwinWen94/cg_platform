@@ -2,19 +2,20 @@ package com.calligraphy.service.converter;
 
 import com.calligraphy.domain.entity.*;
 import com.calligraphy.service.netbean.institution.*;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class InstitutionConverter {
-    public static InstitutionDto toDto(Institution institution,
-                                       List<InstitutionAchievement> achievementList,
-                                       List<InstitutionEnvironment> environmentList,
-                                       List<InstitutionTeacher> teacherList,
-                                       InstitutionPrincipalQuote principalQuote,
-                                       List<InstitutionCourse> courseList,
-                                       List<InstitutionActivity> activityList) {
+    public static InstitutionDto toDto(final Institution institution,
+                                       final List<InstitutionAchievement> achievementList,
+                                       final List<InstitutionEnvironment> environmentList,
+                                       final List<InstitutionTeacher> teacherList,
+                                       final InstitutionPrincipalQuote principalQuote,
+                                       final List<InstitutionCourse> courseList,
+                                       final List<InstitutionActivity> activityList) {
         InstitutionDto dto = new InstitutionDto();
         dto.setInstitutionId(institution.getId());
         dto.setInstitutionName(institution.getInstitutionName());
@@ -24,26 +25,39 @@ public class InstitutionConverter {
         dto.setInstitutionImage(institution.getInstitutionImage());
         dto.setFollowCount(institution.getFollowCount());
 
-        dto.setAchievementDtoList(achievementList.stream().map(InstitutionConverter::toAchievementDto)
-                .collect(Collectors.toList()));
+        if (!CollectionUtils.isEmpty(achievementList)) {
+            dto.setAchievementDtoList(achievementList.stream().map(InstitutionConverter::toAchievementDto)
+                    .collect(Collectors.toList()));
+        }
 
-        dto.setEnvironmentDtoList(environmentList.stream().map(InstitutionConverter::toEnvironmentDto)
-                .collect(Collectors.toList()));
+        if (!CollectionUtils.isEmpty(environmentList)) {
+            dto.setEnvironmentDtoList(environmentList.stream().map(InstitutionConverter::toEnvironmentDto)
+                    .collect(Collectors.toList()));
+        }
 
-        dto.setTeacherDtoList(teacherList.stream().map(InstitutionConverter::toTeacherDto)
-                .collect(Collectors.toList()));
+        if (!CollectionUtils.isEmpty(teacherList)) {
+            dto.setTeacherDtoList(teacherList.stream().map(InstitutionConverter::toTeacherDto)
+                    .collect(Collectors.toList()));
+        }
 
-        dto.setPrincipalQuoteDto(InstitutionConverter.toPrincipalQuoteDto(principalQuote));
+        if (principalQuote != null) {
+            dto.setPrincipalQuoteDto(InstitutionConverter.toPrincipalQuoteDto(principalQuote));
+        }
 
-        dto.setCourseDtoList(courseList.stream().map(InstitutionConverter::toCourseDto)
-                .collect(Collectors.toList()));
+        if (!CollectionUtils.isEmpty(courseList)) {
+            dto.setCourseDtoList(courseList.stream().map(InstitutionConverter::toCourseDto)
+                    .collect(Collectors.toList()));
+        }
 
-        dto.setActivityDtoList(activityList.stream().map(InstitutionConverter::toActivityDto)
-                .collect(Collectors.toList()));
+        if (!CollectionUtils.isEmpty(activityList)) {
+            dto.setActivityDtoList(activityList.stream().map(InstitutionConverter::toActivityDto)
+                    .collect(Collectors.toList()));
+        }
         return dto;
     }
 
-    public static InstitutionOverviewDto toOverviewDto(Institution institution, List<String> environmentList) {
+    public static InstitutionOverviewDto toOverviewDto(final Institution institution,
+                                                       final List<String> environmentList) {
         InstitutionOverviewDto overviewDto = new InstitutionOverviewDto();
         overviewDto.setInstitutionId(institution.getId());
         overviewDto.setInstitutionName(institution.getInstitutionName());
@@ -54,7 +68,7 @@ public class InstitutionConverter {
         return overviewDto;
     }
 
-    public static InstitutionAchievementDto toAchievementDto(InstitutionAchievement achievement) {
+    public static InstitutionAchievementDto toAchievementDto(final InstitutionAchievement achievement) {
         InstitutionAchievementDto achievementDto = new InstitutionAchievementDto();
         achievementDto.setInstitutionAchievementId(achievement.getId());
         achievementDto.setAchievementYear(achievement.getAchievementYear());
@@ -63,14 +77,14 @@ public class InstitutionConverter {
         return achievementDto;
     }
 
-    public static InstitutionEnvironmentDto toEnvironmentDto(InstitutionEnvironment environment) {
+    public static InstitutionEnvironmentDto toEnvironmentDto(final InstitutionEnvironment environment) {
         InstitutionEnvironmentDto environmentDto = new InstitutionEnvironmentDto();
         environmentDto.setInstitutionEnvironmentId(environment.getId());
         environmentDto.setEnvironmentImage(environment.getEnvironmentImage());
         return environmentDto;
     }
 
-    public static InstitutionTeacherDto toTeacherDto(InstitutionTeacher institutionTeacher) {
+    public static InstitutionTeacherDto toTeacherDto(final InstitutionTeacher institutionTeacher) {
         InstitutionTeacherDto teacherDto = new InstitutionTeacherDto();
         teacherDto.setInstitutionTeacherId(institutionTeacher.getId());
         teacherDto.setTeacherName(institutionTeacher.getTeacherName());
@@ -79,7 +93,7 @@ public class InstitutionConverter {
         return teacherDto;
     }
 
-    public static InstitutionPrincipalQuoteDto toPrincipalQuoteDto(InstitutionPrincipalQuote principalQuote) {
+    public static InstitutionPrincipalQuoteDto toPrincipalQuoteDto(final InstitutionPrincipalQuote principalQuote) {
         InstitutionPrincipalQuoteDto principalQuoteDto = new InstitutionPrincipalQuoteDto();
         principalQuoteDto.setInstitutionPrincipalQuoteId(principalQuote.getId());
         principalQuoteDto.setPrincipalName(principalQuote.getPrincipalName());
@@ -89,7 +103,7 @@ public class InstitutionConverter {
         return principalQuoteDto;
     }
 
-    public static InstitutionCourseDto toCourseDto(InstitutionCourse institutionCourse) {
+    public static InstitutionCourseDto toCourseDto(final InstitutionCourse institutionCourse) {
         InstitutionCourseDto courseDto = new InstitutionCourseDto();
         courseDto.setInstitutionCourseId(institutionCourse.getId());
         courseDto.setCourseName(institutionCourse.getCourseName());
@@ -101,7 +115,7 @@ public class InstitutionConverter {
         return courseDto;
     }
 
-    public static InstitutionCourseOverviewDto toCourseOverviewDto(InstitutionCourse institutionCourse) {
+    public static InstitutionCourseOverviewDto toCourseOverviewDto(final InstitutionCourse institutionCourse) {
         InstitutionCourseOverviewDto courseOverviewDto = new InstitutionCourseOverviewDto();
         courseOverviewDto.setInstitutionCourseId(institutionCourse.getId());
         courseOverviewDto.setCourseName(institutionCourse.getCourseName());
@@ -110,7 +124,7 @@ public class InstitutionConverter {
         return courseOverviewDto;
     }
 
-    public static InstitutionActivityDto toActivityDto(InstitutionActivity institutionActivity) {
+    public static InstitutionActivityDto toActivityDto(final InstitutionActivity institutionActivity) {
         InstitutionActivityDto activityDto = new InstitutionActivityDto();
         activityDto.setInstitutionActivityId(institutionActivity.getId());
         activityDto.setActivityName(institutionActivity.getActivityName());
@@ -123,7 +137,7 @@ public class InstitutionConverter {
     }
 
 
-    public static InstitutionActivityOverviewDto toActivityOverviewDto(InstitutionActivity institutionActivity) {
+    public static InstitutionActivityOverviewDto toActivityOverviewDto(final InstitutionActivity institutionActivity) {
         InstitutionActivityOverviewDto activityOverviewDto = new InstitutionActivityOverviewDto();
         activityOverviewDto.setInstitutionActivityId(institutionActivity.getId());
         activityOverviewDto.setActivityImage(institutionActivity.getActivityImage());

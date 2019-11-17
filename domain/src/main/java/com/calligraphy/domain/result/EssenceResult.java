@@ -14,11 +14,11 @@ public class EssenceResult {
 
     private String essenceType2;
 
-    private String essenceDynasty;
+    private Integer essenceDynasty;
 
     private String essenceSource;
 
-    private String wordCount;
+    private Integer wordCount;
 
     private String essenceDesc;
 }

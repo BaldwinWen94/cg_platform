@@ -42,7 +42,7 @@ public class EssenceController {
         return essenceService.selectAllEssenceType();
     }
 
-    @ApiOperation(value = "查询书家必携")
+    @ApiOperation(value = "查询书家必携, 若字数、朝代选择全部，则传0；字数15字以上，传15；朝代为枚举值")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "查询成功", response = EssenceDto.class, responseContainer = "list"),
             @ApiResponse(code = 400, message = "参数错误"),
@@ -51,8 +51,8 @@ public class EssenceController {
     @GetMapping(value = "/condition", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity selectEssenceByCondition(@RequestParam String essenceType1,
                                                    @RequestParam String essenceType2,
-                                                   @RequestParam String wordCount,
-                                                   @RequestParam(required = false) String dynasty,
+                                                   @RequestParam Integer wordCount,
+                                                   @RequestParam Integer dynasty,
                                                    @RequestParam(required = false) Integer pageStart,
                                                    @RequestParam(required = false) Integer pageSize) {
         return essenceService.selectEssenceByCondition(essenceType1, essenceType2, wordCount, dynasty,

@@ -30,8 +30,7 @@ public class EssenceDto {
 
     @ApiModelProperty(value = "书家必携朝代", required = true)
     @NotNull(message = "朝代不能为空")
-    @Size(max = 45, message = "朝代超长")
-    private String essenceDynasty;
+    private Integer essenceDynasty;
 
     @ApiModelProperty(value = "书家必携来源（作者或书名或其他）", required = true)
     @NotNull(message = "来源不能为空")
@@ -40,8 +39,7 @@ public class EssenceDto {
 
     @ApiModelProperty(value = "书家必携字数分类", required = true)
     @NotNull(message = "字数分类不能为空")
-    @Size(max = 45, message = "字数分类不能为空")
-    private String wordCount;
+    private Integer wordCount;
 
     @ApiModelProperty(value = "书家必携其它描述")
     private String essenceDesc;

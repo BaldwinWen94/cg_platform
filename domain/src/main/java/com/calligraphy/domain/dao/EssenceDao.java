@@ -17,8 +17,8 @@ public interface EssenceDao {
 
     List<EssenceResult> selectEssenceByCondition(String type1,
                                                  String type2,
-                                                 String wordCount,
-                                                 String dynasty,
+                                                 Integer wordCount,
+                                                 Integer dynasty,
                                                  Integer offset,
                                                  Integer size);
 
@@ -26,8 +26,8 @@ public interface EssenceDao {
 
     Integer countEssenceByCondition(String type1,
                                     String type2,
-                                    String wordCount,
-                                    String dynasty);
+                                    Integer wordCount,
+                                    Integer dynasty);
 
     void createEssence(Essence essence);
 

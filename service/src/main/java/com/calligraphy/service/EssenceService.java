@@ -7,6 +7,6 @@ public interface EssenceService {
 
     ResponseEntity selectAllEssenceType();
 
-    ResponseEntity selectEssenceByCondition(String essenceType1, String essenceType2, String wordCount,
-                                            String dynasty, PagingParam pagingParam);
+    ResponseEntity selectEssenceByCondition(String essenceType1, String essenceType2, Integer wordCount,
+                                            Integer dynasty, PagingParam pagingParam);
 }

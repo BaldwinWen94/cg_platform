@@ -3,7 +3,6 @@ package com.calligraphy.cg_user.controller;
 
 import com.calligraphy.common.netbean.PagingParam;
 import com.calligraphy.service.CopyBookService;
-import com.calligraphy.service.netbean.copybook.CopyBookDetailDto;
 import com.calligraphy.service.netbean.copybook.CopyBookDto;
 import com.calligraphy.service.netbean.copybook.CopyBookOverviewDto;
 import io.swagger.annotations.Api;

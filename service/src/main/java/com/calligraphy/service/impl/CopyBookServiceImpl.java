@@ -9,7 +9,6 @@ import com.calligraphy.domain.entity.CopyBookDetail;
 import com.calligraphy.domain.entity.CopyBookTag;
 import com.calligraphy.service.CopyBookService;
 import com.calligraphy.service.converter.CopyBookConverter;
-import com.calligraphy.service.netbean.copybook.CopyBookDetailDto;
 import com.calligraphy.service.netbean.copybook.CopyBookDto;
 import com.calligraphy.service.netbean.copybook.CopyBookOverviewDto;
 import org.springframework.beans.factory.annotation.Autowired;

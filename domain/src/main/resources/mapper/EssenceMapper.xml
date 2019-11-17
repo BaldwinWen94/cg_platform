@@ -60,14 +60,24 @@
             </otherwise>
         </choose>
         <choose>
-            <when test="param3 != '全部'">
+            <when test="param3 &gt; 0 and param3 &lt; 15">
+                AND a.word_count = #{param3}
+            </when>
+            <when test="param3 &gt;= 15">
                 AND a.word_count = #{param3}
             </when>
             <otherwise>
 
             </otherwise>
         </choose>
-        AND a.essence_dynasty = #{param4}
+        <choose>
+            <when test="param4 != 0">
+                AND a.essence_dynasty = #{param4}
+            </when>
+            <otherwise>
+
+            </otherwise>
+        </choose>
         limit #{param5}, #{param6}
     </select>
 
@@ -102,14 +112,24 @@
             </otherwise>
         </choose>
         <choose>
-            <when test="param3 != '全部'">
+            <when test="param3 &gt; 0 and param3 &lt; 15">
+                AND a.word_count = #{param3}
+            </when>
+            <when test="param3 &gt;= 15">
                 AND a.word_count = #{param3}
             </when>
             <otherwise>
 
             </otherwise>
         </choose>
-        AND a.essence_dynasty = #{param4}
+        <choose>
+            <when test="param4 != 0">
+                AND a.essence_dynasty = #{param4}
+            </when>
+            <otherwise>
+
+            </otherwise>
+        </choose>
     </select>
 
     <insert id="createEssence" parameterType="Essence"

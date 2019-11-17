@@ -10,7 +10,7 @@ public class CopyBook extends CalligraphyBaseEntity {
 
     private String copyBookType;
 
-    private String copyBookDynasty;
+    private Integer copyBookDynasty;
 
     private String copyBookAuthor;
 

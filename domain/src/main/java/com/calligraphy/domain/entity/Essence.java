@@ -11,11 +11,11 @@ public class Essence extends CalligraphyBaseEntity {
 
     private Integer essenceTypeId;
 
-    private String essenceDynasty;
+    private Integer essenceDynasty;
 
     private String essenceSource;
 
-    private String wordCount;
+    private Integer wordCount;
 
     private String essenceDesc;
 }

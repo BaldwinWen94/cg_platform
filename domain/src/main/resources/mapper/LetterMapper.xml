@@ -6,6 +6,7 @@
         <result column="letter_name" property="letterName"/>
         <result column="font_type" property="fontType"/>
         <result column="letter_sample_image" property="letterSampleImage"/>
+        <result column="letter_sample_dynasty" property="letterSampleDynasty"/>
         <result column="letter_sample_author" property="letterSampleAuthor"/>
         <result column="create_time" property="createTime"/>
         <result column="modify_time" property="modifyTime"/>
